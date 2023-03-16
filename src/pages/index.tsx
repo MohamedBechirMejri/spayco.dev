@@ -1,9 +1,8 @@
-import { Stars, Text } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { type NextPage } from "next";
 import Head from "next/head";
+import Scene from "~/components/Scene";
 import Footer from "~/components/Footer";
+import { Canvas } from "@react-three/fiber";
 
 const Home: NextPage = () => {
   return (
@@ -15,50 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <main className="h-[100svh] bg-black">
         <Canvas>
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <Stars
-            radius={100}
-            depth={50}
-            count={5000}
-            factor={4}
-            saturation={0}
-            fade
-            speed={1}
-          />
-          <group>
-            <Text
-              font="/fonts/bangers.ttf"
-              position={[0, 0, 0]}
-              rotation={[0, 0, 0]}
-              castShadow
-              fontSize={1}
-            >
-              Aziz Mejri
-              <meshStandardMaterial
-                emissive="purple"
-                emissiveIntensity={4}
-                toneMapped={false}
-              />
-            </Text>
-            <Text
-              font="/fonts/bangers.ttf"
-              position={[0, 0, 0]}
-              rotation={[0, Math.PI, 0]}
-              castShadow
-              fontSize={1}
-            >
-              Spayco
-              <meshStandardMaterial
-                emissive="blue"
-                emissiveIntensity={4}
-                toneMapped={false}
-              />
-            </Text>
-          </group>
-          <EffectComposer>
-            <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} mipmapBlur />
-          </EffectComposer>
+          <Scene />
         </Canvas>
       </main>
       <Footer />

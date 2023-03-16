@@ -1,7 +1,9 @@
-import { OrbitControls, Sparkles } from "@react-three/drei";
+import { Stars, Text } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { type NextPage } from "next";
 import Head from "next/head";
+import Footer from "~/components/Footer";
 
 const Home: NextPage = () => {
   return (
@@ -14,18 +16,52 @@ const Home: NextPage = () => {
       <main className="h-[100svh] bg-black">
         <Canvas>
           <ambientLight />
-          <Sparkles
-            count={1000}
-            speed={0}
-            opacity={1}
-            color="white"
-            size={5}
-            scale={77}
-            noise={1}
+          <pointLight position={[10, 10, 10]} />
+          <Stars
+            radius={100}
+            depth={50}
+            count={5000}
+            factor={4}
+            saturation={0}
+            fade
+            speed={1}
           />
-          <OrbitControls />
+          <group>
+            <Text
+              font="/fonts/bangers.ttf"
+              position={[0, 0, 0]}
+              rotation={[0, 0, 0]}
+              castShadow
+              fontSize={1}
+            >
+              Aziz Mejri
+              <meshStandardMaterial
+                emissive="purple"
+                emissiveIntensity={4}
+                toneMapped={false}
+              />
+            </Text>
+            <Text
+              font="/fonts/bangers.ttf"
+              position={[0, 0, 0]}
+              rotation={[0, Math.PI, 0]}
+              castShadow
+              fontSize={1}
+            >
+              Spayco
+              <meshStandardMaterial
+                emissive="blue"
+                emissiveIntensity={4}
+                toneMapped={false}
+              />
+            </Text>
+          </group>
+          <EffectComposer>
+            <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} mipmapBlur />
+          </EffectComposer>
         </Canvas>
       </main>
+      <Footer />
     </>
   );
 };
